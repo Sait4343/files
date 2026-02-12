@@ -77,3 +77,50 @@ def analyze_presence_trend(scan_results: List[Dict[str, Any]]) -> pd.DataFrame:
         return trend.set_index('date')
     
     return pd.DataFrame()
+
+
+def calculate_competitor_stats(results: List[Dict[str, Any]], brands: List[str]) -> List[Dict[str, Any]]:
+    """
+    Calculate stats for each brand based on scan results.
+    
+    Args:
+        results: List of scan results
+        brands: List of brand names to check
+        
+    Returns:
+        List of dictionaries with Brand, Mentions, and Share of Voice keys
+    """
+    stats = {brand: 0 for brand in brands}
+    total_mentions = 0
+    
+    for r in results:
+        # Robust parsing of response (handling dict or string)
+        response_content = r.get("response", "")
+        if isinstance(response_content, dict):
+            # If response is structured, try to find text representation
+            content_str = str(
+                response_content.get("text") or 
+                response_content.get("output") or 
+                response_content
+            )
+        else:
+            content_str = str(response_content)
+            
+        content_lower = content_str.lower()
+        
+        for brand in brands:
+            if brand.lower() in content_lower:
+                stats[brand] += 1
+                total_mentions += 1
+    
+    # Format for DataFrame
+    output = []
+    for brand, count in stats.items():
+        sov = (count / total_mentions * 100) if total_mentions > 0 else 0
+        output.append({
+            "Brand": brand,
+            "Mentions": count,
+            "Share of Voice": sov
+        })
+    
+    return output

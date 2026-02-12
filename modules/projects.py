@@ -2,6 +2,7 @@
 import streamlit as st
 from core import SessionStateManager
 from core.database import get_database
+from utils.helpers import clean_url
 
 def show_my_projects_page():
     """Display projects management page."""
@@ -40,7 +41,7 @@ def show_my_projects_page():
                 project = db.create_project({
                     "user_id": user_id,
                     "brand_name": brand,
-                    "domain": domain,
+                    "domain": clean_url(domain),
                     "industry": industry,
                     "region": region,
                     "description": description,

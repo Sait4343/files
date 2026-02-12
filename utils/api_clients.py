@@ -8,6 +8,7 @@ import requests
 import streamlit as st
 import logging
 from core.config import N8N_URLS, N8N_AUTH_HEADER, DEFAULTS
+from utils.helpers import parse_json_safe
 
 logger = logging.getLogger(__name__)
 
@@ -139,13 +140,10 @@ class N8NClient:
                 return prompts
             elif isinstance(prompts, str):
                 # Try to parse as list
-                import json
-                try:
-                    parsed = json.loads(prompts)
-                    if isinstance(parsed, list):
-                        return parsed
-                except:
-                    pass
+                parsed = parse_json_safe(prompts)
+                if isinstance(parsed, list):
+                    return parsed
+                
                 # Split by newlines as fallback
                 return [p.strip() for p in prompts.split('\n') if p.strip()]
         

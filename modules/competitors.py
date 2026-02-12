@@ -11,6 +11,7 @@ from typing import List, Dict, Any
 from core.state import SessionStateManager
 from core.database import get_database
 from core.config import COLORS
+from core.analytics import calculate_competitor_stats
 
 def show_competitors_page() -> None:
     """Display the Competitors Analysis page."""
@@ -43,7 +44,8 @@ def show_competitors_page() -> None:
         return
 
     # Process Data
-    stats = _calculate_competitor_stats(scan_results, all_brands)
+    # Process Data
+    stats = calculate_competitor_stats(scan_results, all_brands)
     
     # Visualizations
     col1, col2 = st.columns([2, 1])
@@ -77,38 +79,6 @@ def show_competitors_page() -> None:
     _show_params_explanation()
 
 
-def _calculate_competitor_stats(results: List[Dict[str, Any]], brands: List[str]) -> List[Dict[str, Any]]:
-    """Calculate stats for each brand based on scan results."""
-    stats = {brand: 0 for brand in brands}
-    total_mentions = 0
-    
-    for r in results:
-        # Robust parsing of response (handling dict or string)
-        response_content = r.get("response", "")
-        if isinstance(response_content, dict):
-            # If response is structured, try to find text representation
-            content_str = str(response_content.get("text") or response_content.get("output") or response_content)
-        else:
-            content_str = str(response_content)
-            
-        content_lower = content_str.lower()
-        
-        for brand in brands:
-            if brand.lower() in content_lower:
-                stats[brand] += 1
-                total_mentions += 1
-    
-    # Format for DataFrame
-    output = []
-    for brand, count in stats.items():
-        sov = (count / total_mentions * 100) if total_mentions > 0 else 0
-        output.append({
-            "Brand": brand,
-            "Mentions": count,
-            "Share of Voice": sov
-        })
-    
-    return output
 
 
 def _create_sov_chart(stats: List[Dict[str, Any]]) -> go.Figure:

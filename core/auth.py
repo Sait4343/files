@@ -6,6 +6,7 @@ Handles user login, registration, session management and cookie handling.
 from typing import Optional
 import streamlit as st
 import extra_streamlit_components as stx
+from utils.helpers import validate_email
 from .database import get_database
 from .state import SessionStateManager
 from .config import Config
@@ -160,6 +161,8 @@ def show_auth_page() -> None:
                     # Validation
                     if not all([reg_name, reg_email, reg_password, reg_password_confirm]):
                         st.error("⚠️ Заповніть всі поля")
+                    elif not validate_email(reg_email):
+                        st.error("⚠️ Невірний формат email")
                     elif len(reg_password) < 6:
                         st.error("⚠️ Пароль має містити мінімум 6 символів")
                     elif reg_password != reg_password_confirm:

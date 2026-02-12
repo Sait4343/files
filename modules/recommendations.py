@@ -9,6 +9,7 @@ from typing import List, Dict, Any
 from core.state import SessionStateManager
 from core.database import get_database
 from utils.api_clients import get_n8n_client
+from utils.helpers import parse_json_safe
 from datetime import datetime
 
 def show_recommendations_page() -> None:
@@ -74,13 +75,10 @@ def _generate_recommendations(project: Dict[str, Any], db: Any) -> None:
         # Structure depends on N8N response. Assuming it returns a JSON object.
         
         # Parse if string
+        # Parse if string
         if isinstance(result, str):
              # Try to parse or wrap
-             import json
-             try:
-                 content = json.loads(result)
-             except:
-                 content = {"General": result}
+             content = parse_json_safe(result, default={"General": result})
         else:
             content = result
 
