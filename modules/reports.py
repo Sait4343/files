@@ -5,6 +5,7 @@ Generates and displays analysis reports.
 
 import streamlit as st
 import pandas as pd
+from typing import Dict, Any, List
 from datetime import datetime
 from core.state import SessionStateManager
 from core.database import get_database
