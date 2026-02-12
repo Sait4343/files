@@ -166,9 +166,7 @@
     "not_found": "Not found",
     "server_error": "Server error",
     "invalid_input": "Invalid input"
-  }
-}
-,
+  },
   "tooltips": {
     "sov": "Your brand's share of visibility in AI responses compared to competitors",
     "official": "Percentage of links to your official resources",
@@ -183,4 +181,4 @@
     "claude": "Claude 3",
     "gemini": "Google Gemini"
   }
-
+}
