@@ -1,6 +1,8 @@
 """Billing page module - shows plan info and allows upgrades."""
 import streamlit as st
-from core import t, BillingManager, show_billing_info, show_plan_comparison, SessionStateManager
+import streamlit as st
+from core import t, SessionStateManager
+from core.billing_manager import BillingManager, show_billing_info, show_plan_comparison
 
 def show_billing_page():
     """Display billing and subscription page."""

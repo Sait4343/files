@@ -10,6 +10,7 @@ from .auth import check_session, logout, show_auth_page, require_admin
 from .i18n import I18n, t, language_selector
 from .styles import Styles
 from .analytics import calculate_dashboard_metrics
+from .billing_manager import BillingManager, show_billing_info, show_plan_comparison
 
 __all__ = [
     'Config',
@@ -28,5 +29,8 @@ __all__ = [
     'METRIC_TOOLTIPS',
     'COLORS',
     'STATUS_LABELS',
-    'DEFAULTS'
+    'DEFAULTS',
+    'BillingManager',
+    'show_billing_info',
+    'show_plan_comparison'
 ]
