@@ -6,7 +6,7 @@ from typing import List, Dict, Any, Optional
 import plotly.graph_objects as go
 import plotly.express as px
 import pandas as pd
-from ..core.config import COLORS, DEFAULTS
+from core.config import COLORS, DEFAULTS
 
 
 def get_donut_chart(

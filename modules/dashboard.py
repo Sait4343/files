@@ -14,7 +14,7 @@ from core.analytics import (
     analyze_sentiment_distribution,
     analyze_presence_trend
 )
-from utils import get_donut_chart, format_date
+from utils import format_date
 
 
 def show_dashboard() -> None:
