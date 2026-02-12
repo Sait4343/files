@@ -1,32 +1,27 @@
 """
-Application modules initialization.
-Contains all page modules for the application.
+Core module initialization.
+Exposes key classes and functions from the core package.
 """
 
-from .dashboard import show_dashboard
-from .keywords import show_keywords_page
-from .sources import show_sources_page
-from .competitors import show_competitors_page
-from .recommendations import show_recommendations_page
-from .history import show_history_page
-from .reports import show_reports_page
-from .projects import show_my_projects_page
-from .chat import show_chat_page
-from .faq import show_faq_page
-from .admin import show_admin_page
-from .billing import show_billing_page
+from .config import Config
+from .database import get_database, Database
+from .state import SessionStateManager
+from .auth import check_session, logout, show_auth_page
+from .i18n import I18n, t, language_selector
+from .styles import Styles
+from .analytics import calculate_dashboard_metrics
 
 __all__ = [
-    'show_dashboard',
-    'show_keywords_page',
-    'show_sources_page',
-    'show_competitors_page',
-    'show_recommendations_page',
-    'show_history_page',
-    'show_reports_page',
-    'show_my_projects_page',
-    'show_chat_page',
-    'show_faq_page',
-    'show_admin_page',
-    'show_billing_page'
+    'Config',
+    'SessionStateManager',
+    'get_database',
+    'Database',
+    'check_session',
+    'logout',
+    'show_auth_page',
+    'I18n',
+    't',
+    'language_selector',
+    'Styles',
+    'calculate_dashboard_metrics'
 ]
