@@ -1,0 +1,186 @@
+{
+  "app": {
+    "title": "AI Visibility by Virshi",
+    "tagline": "Моніторинг присутності вашого бренду в AI-моделях"
+  },
+  "auth": {
+    "login": "Вхід",
+    "register": "Реєстрація",
+    "email": "Email",
+    "password": "Пароль",
+    "confirm_password": "Підтвердіть пароль",
+    "first_name": "Ім'я",
+    "last_name": "Прізвище",
+    "login_button": "Увійти",
+    "register_button": "Зареєструватися",
+    "logout": "Вийти з акаунту",
+    "agree_terms": "Я погоджуюсь з умовами використання",
+    "login_title": "Вхід в акаунт",
+    "register_title": "Створити акаунт",
+    "login_success": "Вітаємо, {email}!",
+    "register_success": "Акаунт створено! Перейдіть на вкладку 'Вхід'",
+    "login_error": "Невірний email або пароль",
+    "register_error": "Помилка реєстрації. Можливо, email вже використовується",
+    "password_min_length": "Пароль має містити мінімум 6 символів",
+    "passwords_dont_match": "Паролі не збігаються",
+    "fill_all_fields": "Заповніть всі поля",
+    "accept_terms": "Необхідно прийняти умови використання"
+  },
+  "sidebar": {
+    "project": "Проект",
+    "select_project": "Оберіть проект"
+  },
+  "menu": {
+    "dashboard": "Дашборд",
+    "my_projects": "Мої проекти",
+    "keywords": "Перелік запитів",
+    "sources": "Джерела",
+    "competitors": "Конкуренти",
+    "recommendations": "Рекомендації",
+    "history": "Історія сканувань",
+    "reports": "Звіти",
+    "chat": "GPT-Visibility",
+    "faq": "FAQ",
+    "admin": "Адмін",
+    "billing": "Білінг"
+  },
+  "dashboard": {
+    "title": "Дашборд",
+    "key_metrics": "Ключові метрики",
+    "sov": "Share of Voice",
+    "presence": "Присутність",
+    "official_sources": "Офіційні джерела",
+    "avg_position": "Середня позиція",
+    "domain_links": "Посилання на домен",
+    "sentiment_distribution": "Розподіл тональності",
+    "presence_trend": "Динаміка присутності",
+    "recent_activity": "Остання активність",
+    "quick_actions": "Швидкі дії",
+    "run_analysis": "Запустити аналіз",
+    "add_keywords": "Додати запити",
+    "view_reports": "Переглянути звіти",
+    "no_project": "Проект не обрано. Перейдіть до розділу 'Мої проекти'",
+    "no_data": "Немає даних для відображення",
+    "no_scans": "Ще немає результатів сканування. Додайте запити та запустіть аналіз"
+  },
+  "keywords": {
+    "title": "Перелік запитів",
+    "list": "Список запитів",
+    "add": "Додати запити",
+    "generate_ai": "Генерація запитів через AI",
+    "describe_products": "Опишіть ваші продукти/послуги",
+    "generate": "Згенерувати",
+    "no_keywords": "Запитів ще немає",
+    "generated": "Згенеровано {count} запитів!",
+    "select_for_analysis": "Оберіть запити для аналізу",
+    "select_models": "Оберіть AI моделі",
+    "run_analysis": "Запустити аналіз",
+    "analysis_started": "Аналіз запущено! Результати з'являться через 1-2 хвилини",
+    "select_keywords_first": "Спочатку оберіть запити",
+    "select_models_first": "Оберіть хоча б одну модель",
+    "keyword": "Запит",
+    "status": "Статус",
+    "created": "Створено",
+    "actions": "Дії"
+  },
+  "sources": {
+    "title": "Офіційні джерела",
+    "list": "Список джерел",
+    "add": "Додати джерело",
+    "url": "URL",
+    "type": "Тип",
+    "add_button": "Додати",
+    "delete": "Видалити",
+    "no_sources": "Джерел ще немає",
+    "source_added": "Джерело додано!",
+    "types": {
+      "website": "Веб-сайт",
+      "blog": "Блог",
+      "social": "Соцмережа",
+      "documentation": "Документація"
+    }
+  },
+  "projects": {
+    "title": "Мої проекти",
+    "my_projects": "Мої проекти",
+    "create": "Створити проект",
+    "brand_name": "Назва бренду",
+    "domain": "Домен (example.com)",
+    "industry": "Галузь",
+    "create_button": "Створити",
+    "select": "Обрати",
+    "no_projects": "У вас ще немає проектів",
+    "project_created": "Проект створено!",
+    "project_selected": "Проект обрано!",
+    "status": "Статус"
+  },
+  "billing": {
+    "title": "Білінг та ліміти",
+    "current_plan": "Поточний план",
+    "scans_used": "Використано сканувань",
+    "scans_limit": "Ліміт сканувань",
+    "scans_remaining": "Залишилось сканувань",
+    "upgrade": "Покращити план",
+    "plans": {
+      "trial": "Trial (Безкоштовно)",
+      "starter": "Starter",
+      "professional": "Professional",
+      "enterprise": "Enterprise"
+    },
+    "features": {
+      "trial": "10 сканувань, базові функції",
+      "starter": "100 сканувань/місяць, всі AI моделі",
+      "professional": "500 сканувань/місяць, аналітика, звіти",
+      "enterprise": "Необмежено, API, пріоритетна підтримка"
+    },
+    "limit_reached": "Ви досягли ліміту сканувань для плану {plan}",
+    "upgrade_required": "Для продовження роботи покращіть свій план"
+  },
+  "chat": {
+    "title": "AI Visibility Assistant",
+    "placeholder": "Ваше питання...",
+    "typing": "AI Assistant друкує...",
+    "welcome": "На основі останнього аналізу, присутність **{brand}** покращилась. Готовий допомогти з питаннями видимості.",
+    "no_project": "Проект не обрано"
+  },
+  "common": {
+    "loading": "Завантаження...",
+    "error": "Помилка",
+    "success": "Успішно",
+    "cancel": "Скасувати",
+    "save": "Зберегти",
+    "delete": "Видалити",
+    "edit": "Редагувати",
+    "close": "Закрити",
+    "yes": "Так",
+    "no": "Ні",
+    "search": "Пошук",
+    "filter": "Фільтр",
+    "export": "Експорт",
+    "import": "Імпорт"
+  },
+  "errors": {
+    "database": "Помилка бази даних",
+    "network": "Помилка мережі",
+    "unauthorized": "Немає доступу",
+    "not_found": "Не знайдено",
+    "server_error": "Помилка сервера",
+    "invalid_input": "Невірні дані"
+  }
+}
+,
+  "tooltips": {
+    "sov": "Частка видимості вашого бренду у відповідях ШІ порівняно з конкурентами",
+    "official": "Частка посилань на ваші офіційні ресурси",
+    "sentiment": "Тональність: Позитивна, Нейтральна або Негативна",
+    "position": "Середня позиція вашого бренду у списках рекомендацій",
+    "presence": "Відсоток запитів, де бренд був згаданий",
+    "domain": "Відсоток запитів з клікабельним посиланням на ваш домен"
+  },
+  "models": {
+    "perplexity": "Perplexity",
+    "chatgpt": "ChatGPT-4",
+    "claude": "Claude 3",
+    "gemini": "Google Gemini"
+  }
+

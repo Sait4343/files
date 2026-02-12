@@ -1,0 +1,186 @@
+{
+  "app": {
+    "title": "AI Visibility by Virshi",
+    "tagline": "Monitor your brand's presence in AI models"
+  },
+  "auth": {
+    "login": "Login",
+    "register": "Register",
+    "email": "Email",
+    "password": "Password",
+    "confirm_password": "Confirm Password",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "login_button": "Sign In",
+    "register_button": "Sign Up",
+    "logout": "Logout",
+    "agree_terms": "I agree to the terms of use",
+    "login_title": "Login to your account",
+    "register_title": "Create an account",
+    "login_success": "Welcome, {email}!",
+    "register_success": "Account created! Please go to 'Login' tab",
+    "login_error": "Invalid email or password",
+    "register_error": "Registration failed. Email might already be in use",
+    "password_min_length": "Password must be at least 6 characters",
+    "passwords_dont_match": "Passwords don't match",
+    "fill_all_fields": "Please fill in all fields",
+    "accept_terms": "You must accept the terms of use"
+  },
+  "sidebar": {
+    "project": "Project",
+    "select_project": "Select project"
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "my_projects": "My Projects",
+    "keywords": "Keywords",
+    "sources": "Sources",
+    "competitors": "Competitors",
+    "recommendations": "Recommendations",
+    "history": "Scan History",
+    "reports": "Reports",
+    "chat": "GPT-Visibility",
+    "faq": "FAQ",
+    "admin": "Admin",
+    "billing": "Billing"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "key_metrics": "Key Metrics",
+    "sov": "Share of Voice",
+    "presence": "Presence",
+    "official_sources": "Official Sources",
+    "avg_position": "Average Position",
+    "domain_links": "Domain Links",
+    "sentiment_distribution": "Sentiment Distribution",
+    "presence_trend": "Presence Trend",
+    "recent_activity": "Recent Activity",
+    "quick_actions": "Quick Actions",
+    "run_analysis": "Run Analysis",
+    "add_keywords": "Add Keywords",
+    "view_reports": "View Reports",
+    "no_project": "No project selected. Go to 'My Projects'",
+    "no_data": "No data to display",
+    "no_scans": "No scan results yet. Add keywords and run analysis"
+  },
+  "keywords": {
+    "title": "Keywords",
+    "list": "Keywords List",
+    "add": "Add Keywords",
+    "generate_ai": "Generate keywords with AI",
+    "describe_products": "Describe your products/services",
+    "generate": "Generate",
+    "no_keywords": "No keywords yet",
+    "generated": "Generated {count} keywords!",
+    "select_for_analysis": "Select keywords for analysis",
+    "select_models": "Select AI models",
+    "run_analysis": "Run Analysis",
+    "analysis_started": "Analysis started! Results will appear in 1-2 minutes",
+    "select_keywords_first": "Please select keywords first",
+    "select_models_first": "Please select at least one model",
+    "keyword": "Keyword",
+    "status": "Status",
+    "created": "Created",
+    "actions": "Actions"
+  },
+  "sources": {
+    "title": "Official Sources",
+    "list": "Sources List",
+    "add": "Add Source",
+    "url": "URL",
+    "type": "Type",
+    "add_button": "Add",
+    "delete": "Delete",
+    "no_sources": "No sources yet",
+    "source_added": "Source added!",
+    "types": {
+      "website": "Website",
+      "blog": "Blog",
+      "social": "Social Media",
+      "documentation": "Documentation"
+    }
+  },
+  "projects": {
+    "title": "My Projects",
+    "my_projects": "My Projects",
+    "create": "Create Project",
+    "brand_name": "Brand Name",
+    "domain": "Domain (example.com)",
+    "industry": "Industry",
+    "create_button": "Create",
+    "select": "Select",
+    "no_projects": "You don't have any projects yet",
+    "project_created": "Project created!",
+    "project_selected": "Project selected!",
+    "status": "Status"
+  },
+  "billing": {
+    "title": "Billing & Limits",
+    "current_plan": "Current Plan",
+    "scans_used": "Scans Used",
+    "scans_limit": "Scans Limit",
+    "scans_remaining": "Scans Remaining",
+    "upgrade": "Upgrade Plan",
+    "plans": {
+      "trial": "Trial (Free)",
+      "starter": "Starter",
+      "professional": "Professional",
+      "enterprise": "Enterprise"
+    },
+    "features": {
+      "trial": "10 scans, basic features",
+      "starter": "100 scans/month, all AI models",
+      "professional": "500 scans/month, analytics, reports",
+      "enterprise": "Unlimited, API, priority support"
+    },
+    "limit_reached": "You've reached the scan limit for {plan} plan",
+    "upgrade_required": "Please upgrade your plan to continue"
+  },
+  "chat": {
+    "title": "AI Visibility Assistant",
+    "placeholder": "Your question...",
+    "typing": "AI Assistant is typing...",
+    "welcome": "Based on the latest analysis, **{brand}**'s presence has improved. Ready to help with visibility insights.",
+    "no_project": "No project selected"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "yes": "Yes",
+    "no": "No",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "import": "Import"
+  },
+  "errors": {
+    "database": "Database error",
+    "network": "Network error",
+    "unauthorized": "Unauthorized",
+    "not_found": "Not found",
+    "server_error": "Server error",
+    "invalid_input": "Invalid input"
+  }
+}
+,
+  "tooltips": {
+    "sov": "Your brand's share of visibility in AI responses compared to competitors",
+    "official": "Percentage of links to your official resources",
+    "sentiment": "Sentiment: Positive, Neutral, or Negative",
+    "position": "Average position of your brand in recommendation lists",
+    "presence": "Percentage of queries where brand was mentioned",
+    "domain": "Percentage of queries with clickable link to your domain"
+  },
+  "models": {
+    "perplexity": "Perplexity",
+    "chatgpt": "ChatGPT-4",
+    "claude": "Claude 3",
+    "gemini": "Google Gemini"
+  }
+

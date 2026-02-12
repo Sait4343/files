@@ -1,0 +1,9 @@
+extra-streamlit-components
+openpyxl
+pandas
+plotly
+requests
+streamlit
+streamlit-option-menu
+supabase
+xlsxwriter
