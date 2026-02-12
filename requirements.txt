@@ -1,9 +1,9 @@
-extra-streamlit-components
-openpyxl
+streamlit
 pandas
 plotly
-requests
-streamlit
-streamlit-option-menu
 supabase
+streamlit-option-menu
+extra-streamlit-components
+requests
+openpyxl
 xlsxwriter

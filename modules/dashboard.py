@@ -141,15 +141,16 @@ def show_dashboard() -> None:
     
     with col1:
         if st.button("🔍 Запустити аналіз", use_container_width=True):
-            st.switch_page("modules/keywords.py")
+            st.info("Перейдіть до стрінки 'Запити' у меню зліва")
+            # st.switch_page("modules/keywords.py") # Not supported in this navigation mode
     
     with col2:
         if st.button("📝 Додати запити", use_container_width=True):
-            st.switch_page("modules/keywords.py")
+            st.info("Перейдіть до стрінки 'Запити' у меню зліва")
     
     with col3:
         if st.button("📊 Переглянути звіти", use_container_width=True):
-            st.switch_page("modules/reports.py")
+             st.info("Перейдіть до стрінки 'Звіти' у меню зліва")
 
 
 

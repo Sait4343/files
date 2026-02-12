@@ -3,7 +3,7 @@ Core module initialization.
 Exposes key classes and functions from the core package.
 """
 
-from .config import Config
+from .config import Config, METRIC_TOOLTIPS, COLORS, STATUS_LABELS, DEFAULTS
 from .database import get_database, Database
 from .state import SessionStateManager
 from .auth import check_session, logout, show_auth_page
@@ -23,5 +23,9 @@ __all__ = [
     't',
     'language_selector',
     'Styles',
-    'calculate_dashboard_metrics'
+    'calculate_dashboard_metrics',
+    'METRIC_TOOLTIPS',
+    'COLORS',
+    'STATUS_LABELS',
+    'DEFAULTS'
 ]

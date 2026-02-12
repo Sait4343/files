@@ -18,6 +18,25 @@ logger = logging.getLogger(__name__)
 cookie_manager = stx.CookieManager()
 
 
+def _get_user_role(user_id: str) -> str:
+    """
+    Fetch user role from profiles table.
+    """
+    try:
+        db = get_database()
+        role_response = (
+            db.client.table("profiles")
+            .select("role")
+            .eq("id", user_id)
+            .single()
+            .execute()
+        )
+        return role_response.data.get("role", "user") if role_response.data else "user"
+    except Exception as e:
+        logger.error(f"Failed to fetch user role: {e}")
+        return "user"
+
+
 def check_session() -> None:
     """
     Check if user has valid session from cookies.
@@ -38,15 +57,7 @@ def check_session() -> None:
             
             if user:
                 # Fetch user role from profiles table
-                role_response = (
-                    db.client.table("profiles")
-                    .select("role")
-                    .eq("id", user.id)
-                    .single()
-                    .execute()
-                )
-                
-                role = role_response.data.get("role", "user") if role_response.data else "user"
+                role = _get_user_role(user.id)
                 
                 # Update session state
                 SessionStateManager.update_user(user, role)
@@ -82,6 +93,100 @@ def logout() -> None:
         st.error(f"Помилка виходу: {e}")
 
 
+def _render_login_form():
+    """Render and handle login form."""
+    with st.form("login_form", clear_on_submit=True):
+        st.markdown("### Вхід в акаунт")
+        
+        email = st.text_input("📧 Email", placeholder="your@email.com")
+        password = st.text_input("🔒 Пароль", type="password", placeholder="Ваш пароль")
+        
+        submit = st.form_submit_button("Увійти", use_container_width=True)
+        
+        if submit:
+            if not email or not password:
+                st.error("⚠️ Заповніть всі поля")
+            else:
+                with st.spinner("Перевірка облікових даних..."):
+                    db = get_database()
+                    user = db.sign_in(email, password)
+                    
+                    if user:
+                        # Get user role
+                        role = _get_user_role(user.id)
+                        
+                        # Save session
+                        SessionStateManager.update_user(user, role)
+                        
+                        # Save to cookies (if available)
+                        try:
+                            if hasattr(user, 'session'):
+                                cookie_manager.set("auth_token", user.session.access_token)
+                        except Exception as e:
+                            logger.warning(f"Failed to save auth cookie: {e}")
+                        
+                        st.success(f"✅ Вітаємо, {email}!")
+                        logger.info(f"User logged in: {email}")
+                        st.rerun()
+                    else:
+                        st.error("❌ Невірний email або пароль")
+
+
+def _render_register_form():
+    """Render and handle registration form."""
+    with st.form("register_form", clear_on_submit=True):
+        st.markdown("### Створити акаунт")
+        
+        reg_name = st.text_input("👤 Ім'я", placeholder="Ваше ім'я")
+        reg_email = st.text_input("📧 Email", placeholder="your@email.com", key="reg_email")
+        reg_password = st.text_input("🔒 Пароль", type="password", placeholder="Мінімум 6 символів", key="reg_password")
+        reg_password_confirm = st.text_input("🔒 Підтвердіть пароль", type="password", placeholder="Повторіть пароль")
+        
+        agree_terms = st.checkbox("Я погоджуюсь з умовами використання")
+        
+        submit_reg = st.form_submit_button("Зареєструватися", use_container_width=True)
+        
+        if submit_reg:
+            # Validation
+            if not all([reg_name, reg_email, reg_password, reg_password_confirm]):
+                st.error("⚠️ Заповніть всі поля")
+            elif not validate_email(reg_email):
+                st.error("⚠️ Невірний формат email")
+            elif len(reg_password) < 6:
+                st.error("⚠️ Пароль має містити мінімум 6 символів")
+            elif reg_password != reg_password_confirm:
+                st.error("⚠️ Паролі не збігаються")
+            elif not agree_terms:
+                st.error("⚠️ Необхідно прийняти умови використання")
+            else:
+                with st.spinner("Створення акаунту..."):
+                    db = get_database()
+                    
+                    # Create user with metadata
+                    user = db.sign_up(
+                        reg_email,
+                        reg_password,
+                        metadata={"name": reg_name}
+                    )
+                    
+                    if user:
+                        # Create user profile
+                        try:
+                            db.client.table("profiles").insert({
+                                "id": user.id,
+                                "email": reg_email,
+                                "name": reg_name,
+                                "role": "user"
+                            }).execute()
+                        except Exception as e:
+                            logger.warning(f"Failed to create profile: {e}")
+                        
+                        st.success("✅ Акаунт створено! Перейдіть на вкладку 'Вхід'")
+                        logger.info(f"New user registered: {reg_email}")
+                    else:
+                        st.error("❌ Помилка реєстрації. Можливо, email вже використовується.")
+
+
 def show_auth_page() -> None:
     """
     Display authentication page with login and registration tabs.
@@ -97,105 +202,11 @@ def show_auth_page() -> None:
         
         # ==================== LOGIN TAB ====================
         with tab1:
-            with st.form("login_form", clear_on_submit=True):
-                st.markdown("### Вхід в акаунт")
-                
-                email = st.text_input("📧 Email", placeholder="your@email.com")
-                password = st.text_input("🔒 Пароль", type="password", placeholder="Ваш пароль")
-                
-                submit = st.form_submit_button("Увійти", use_container_width=True)
-                
-                if submit:
-                    if not email or not password:
-                        st.error("⚠️ Заповніть всі поля")
-                    else:
-                        with st.spinner("Перевірка облікових даних..."):
-                            db = get_database()
-                            user = db.sign_in(email, password)
-                            
-                            if user:
-                                # Get user role
-                                try:
-                                    role_response = (
-                                        db.client.table("profiles")
-                                        .select("role")
-                                        .eq("id", user.id)
-                                        .single()
-                                        .execute()
-                                    )
-                                    role = role_response.data.get("role", "user") if role_response.data else "user"
-                                except Exception:
-                                    role = "user"
-                                
-                                # Save session
-                                SessionStateManager.update_user(user, role)
-                                
-                                # Save to cookies (if available)
-                                try:
-                                    if hasattr(user, 'session'):
-                                        cookie_manager.set("auth_token", user.session.access_token)
-                                except Exception as e:
-                                    logger.warning(f"Failed to save auth cookie: {e}")
-                                
-                                st.success(f"✅ Вітаємо, {email}!")
-                                logger.info(f"User logged in: {email}")
-                                st.rerun()
-                            else:
-                                st.error("❌ Невірний email або пароль")
+            _render_login_form()
         
         # ==================== REGISTRATION TAB ====================
         with tab2:
-            with st.form("register_form", clear_on_submit=True):
-                st.markdown("### Створити акаунт")
-                
-                reg_name = st.text_input("👤 Ім'я", placeholder="Ваше ім'я")
-                reg_email = st.text_input("📧 Email", placeholder="your@email.com", key="reg_email")
-                reg_password = st.text_input("🔒 Пароль", type="password", placeholder="Мінімум 6 символів", key="reg_password")
-                reg_password_confirm = st.text_input("🔒 Підтвердіть пароль", type="password", placeholder="Повторіть пароль")
-                
-                agree_terms = st.checkbox("Я погоджуюсь з умовами використання")
-                
-                submit_reg = st.form_submit_button("Зареєструватися", use_container_width=True)
-                
-                if submit_reg:
-                    # Validation
-                    if not all([reg_name, reg_email, reg_password, reg_password_confirm]):
-                        st.error("⚠️ Заповніть всі поля")
-                    elif not validate_email(reg_email):
-                        st.error("⚠️ Невірний формат email")
-                    elif len(reg_password) < 6:
-                        st.error("⚠️ Пароль має містити мінімум 6 символів")
-                    elif reg_password != reg_password_confirm:
-                        st.error("⚠️ Паролі не збігаються")
-                    elif not agree_terms:
-                        st.error("⚠️ Необхідно прийняти умови використання")
-                    else:
-                        with st.spinner("Створення акаунту..."):
-                            db = get_database()
-                            
-                            # Create user with metadata
-                            user = db.sign_up(
-                                reg_email,
-                                reg_password,
-                                metadata={"name": reg_name}
-                            )
-                            
-                            if user:
-                                # Create user profile
-                                try:
-                                    db.client.table("profiles").insert({
-                                        "id": user.id,
-                                        "email": reg_email,
-                                        "name": reg_name,
-                                        "role": "user"
-                                    }).execute()
-                                except Exception as e:
-                                    logger.warning(f"Failed to create profile: {e}")
-                                
-                                st.success("✅ Акаунт створено! Перейдіть на вкладку 'Вхід'")
-                                logger.info(f"New user registered: {reg_email}")
-                            else:
-                                st.error("❌ Помилка реєстрації. Можливо, email вже використовується.")
+            _render_register_form()
         
         # Footer
         st.markdown("---")

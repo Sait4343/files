@@ -182,12 +182,22 @@ class Config:
 
 
 # N8N Webhook URLs
-N8N_URLS = {
-    "generate_prompts": "https://virshi.app.n8n.cloud/webhook/webhook/generate-prompts",
-    "analyze": "https://virshi.app.n8n.cloud/webhook/webhook/run-analysis_prod",
-    "recommendations": "https://virshi.app.n8n.cloud/webhook/recommendations",
-    "chat": "https://virshi.app.n8n.cloud/webhook/webhook/chat-bot",
-}
+# Try to get from secrets first, otherwise use defaults
+try:
+    N8N_URLS = {
+        "generate_prompts": st.secrets.get("N8N_GEN_URL", "https://virshi.app.n8n.cloud/webhook/webhook/generate-prompts"),
+        "analyze": st.secrets.get("N8N_ANALYZE_URL", "https://virshi.app.n8n.cloud/webhook/webhook/run-analysis_prod"),
+        "recommendations": st.secrets.get("N8N_RECO_URL", "https://virshi.app.n8n.cloud/webhook/recommendations"),
+        "chat": st.secrets.get("N8N_CHAT_WEBHOOK", "https://virshi.app.n8n.cloud/webhook/webhook/chat-bot"),
+    }
+except FileNotFoundError:
+    # Local fallback without secrets.toml
+    N8N_URLS = {
+        "generate_prompts": "https://virshi.app.n8n.cloud/webhook/webhook/generate-prompts",
+        "analyze": "https://virshi.app.n8n.cloud/webhook/webhook/run-analysis_prod",
+        "recommendations": "https://virshi.app.n8n.cloud/webhook/recommendations",
+        "chat": "https://virshi.app.n8n.cloud/webhook/webhook/chat-bot",
+    }
 
 # N8N Authentication header
 N8N_AUTH_HEADER = {
@@ -229,7 +239,15 @@ DEFAULTS = {
     "onboarding_step": 2,
     "chart_height": 80,
     "chart_width": 80,
-    "timeout_short": 60,
     "timeout_long": 240,
     "max_retries": 3,
+}
+
+# Standard chart layout settings
+CHART_DEFAULTS = {
+    "plot_bgcolor": "white",
+    "paper_bgcolor": "white",
+    "margin": dict(t=40, b=10, l=10, r=10),
+    "xaxis": dict(showgrid=True, gridwidth=1, gridcolor='#f0f0f0'),
+    "yaxis": dict(showgrid=True, gridwidth=1, gridcolor='#f0f0f0'),
 }
